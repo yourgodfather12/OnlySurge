@@ -1,0 +1,389 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 19% 27%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 240 3.7% 15.9%;
+    --ring: 263.4 70% 50.4%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[#0A0A0F] text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+
+  /* Hide scrollbar for mobile */
+  @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-creator-purple-500/30 text-white;
+  }
+
+  /* Focus outline */
+  :focus-visible {
+    @apply outline-none ring-2 ring-creator-purple-500 ring-offset-2 ring-offset-black;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl font-bold md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* Links */
+  a {
+    @apply text-creator-purple-400 hover:text-creator-purple-300 transition-colors;
+  }
+
+  /* Form elements */
+  input, textarea, select {
+    @apply placeholder:text-gray-500;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer components {
+  /* Glass effect */
+  .glass {
+    @apply bg-purple-900/20 backdrop-blur-lg border border-purple-800/30;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-creator-purple-400 to-accent-pink-400 text-transparent bg-clip-text;
+  }
+
+  /* Animated background */
+  .animated-bg {
+    @apply bg-gradient-to-br from-purple-900/50 via-black to-pink-900/30 animate-gradient-xy;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-creator-purple-500/10;
+  }
+
+  /* Dashboard Cards */
+  .stats-card {
+    @apply bg-card/95 backdrop-blur-xl border border-border/50 rounded-xl p-6 
+           shadow-lg shadow-purple-500/5 hover:shadow-purple-500/10 
+           transition-all duration-300;
+  }
+
+  .stats-value {
+    @apply text-2xl font-bold text-foreground mt-2;
+  }
+
+  .stats-label {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+
+  .stats-trend {
+    @apply text-xs font-medium mt-1;
+  }
+
+  .stats-trend-up {
+    @apply text-emerald-500;
+  }
+
+  .stats-trend-down {
+    @apply text-red-500;
+  }
+
+  /* Dashboard Components */
+  .dashboard-card {
+    @apply bg-purple-900/10 backdrop-blur-sm border border-purple-800/30 rounded-xl p-6 transition-all duration-300;
+    box-shadow: 0 0 20px -10px rgba(139, 92, 246, 0.1);
+  }
+
+  .dashboard-card:hover {
+    box-shadow: 0 0 30px -10px rgba(139, 92, 246, 0.2);
+    @apply border-purple-800/50;
+  }
+
+  .dashboard-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  .dashboard-grid-wide {
+    @apply col-span-1 
+           md:col-span-2 
+           lg:col-span-2 
+           xl:col-span-2;
+  }
+
+  .dashboard-grid-full {
+    @apply col-span-1 
+           md:col-span-2 
+           lg:col-span-4 
+           xl:col-span-4;
+  }
+
+  .dashboard-stat {
+    @apply bg-purple-900/20 backdrop-blur-sm border border-purple-800/30 rounded-lg p-4 transition-all duration-300;
+  }
+
+  .dashboard-stat-title {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+
+  .dashboard-stat-value {
+    @apply text-2xl font-bold mb-2;
+    background: linear-gradient(to right, #fff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dashboard-stat-trend {
+    @apply flex items-center gap-1 text-xs font-medium;
+  }
+
+  .dashboard-trend-up {
+    @apply text-emerald-400;
+  }
+
+  .dashboard-trend-down {
+    @apply text-red-400;
+  }
+
+  .dashboard-progress {
+    @apply relative h-2 bg-purple-900/30 rounded-full overflow-hidden;
+  }
+
+  .dashboard-progress-bar {
+    @apply absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-purple-400 transition-all duration-500;
+  }
+
+  .dashboard-activity {
+    @apply flex items-center justify-between py-3 border-b border-[hsl(var(--border)_/_0.2)]
+           last:border-0;
+  }
+
+  .dashboard-activity-time {
+    @apply text-xs text-muted-foreground;
+  }
+
+  .dashboard-activity-amount {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  /* Quick Tip Banner */
+  .quick-tip {
+    @apply flex items-start gap-3 bg-purple-900/20 border border-purple-800/30 rounded-lg p-4 mb-6;
+  }
+
+  .quick-tip-icon {
+    @apply text-yellow-400;
+  }
+
+  /* Navigation */
+  .nav-item {
+    @apply flex items-center px-3 py-2.5 rounded-lg transition-all duration-200
+           hover:bg-[hsl(var(--secondary)_/_0.2)] hover:shadow-md hover:shadow-purple-500/5
+           active:scale-[0.98];
+  }
+
+  .nav-item-active {
+    @apply bg-[hsl(var(--secondary))] text-foreground shadow-md shadow-purple-500/10
+           border border-[hsl(var(--border)_/_0.5)];
+  }
+
+  .nav-item-icon {
+    @apply shrink-0;
+  }
+
+  .nav-item-text {
+    @apply ml-3 text-sm font-medium;
+  }
+
+  /* Glass Panels */
+  .glass-panel {
+    @apply bg-[hsl(var(--background)_/_0.95)] backdrop-blur-xl 
+           border border-[hsl(var(--border)_/_0.5)] rounded-xl;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-bg {
+    @apply bg-gradient-to-br from-[hsl(var(--primary)_/_0.5)] via-background to-[hsl(var(--secondary)_/_0.2)];
+  }
+
+  /* Interactive Elements */
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 
+           hover:shadow-lg hover:shadow-[hsl(var(--primary)_/_0.2)];
+  }
+
+  /* Layout */
+  .main-layout {
+    @apply flex-1 w-full max-w-[2000px] mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .content-grid {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+  }
+
+  .content-section {
+    @apply space-y-6 max-w-[1600px] mx-auto;
+  }
+
+  /* Dashboard Layout */
+  .dashboard-layout {
+    @apply flex min-h-screen bg-background;
+  }
+
+  .dashboard-content {
+    @apply flex-1 overflow-auto pb-8;
+  }
+
+  .dashboard-container {
+    @apply main-layout py-6 space-y-8;
+  }
+}
+
+@layer utilities {
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
+  
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+  
+  .text-secondary {
+    color: hsl(var(--secondary));
+  }
+  
+  .text-accent {
+    color: hsl(var(--accent));
+  }
+  
+  .text-destructive {
+    color: hsl(var(--destructive));
+  }
+}
+
+/* Loading animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+/* Fade animations */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
